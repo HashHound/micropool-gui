@@ -1,12 +1,12 @@
 {
-  "name": "swap-micro-pool",
+  "name": "dogemone-micro-pool",
   "version": "1.5.5",
-  "description": "A minimal Swap Pool",
+  "description": "A minimal Dogemone Pool",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/swap-dev/micropool-gui",
+  "repository": "https://github.com/dogemone-dev/micropool-gui",
   "author": "sebseb7",
   "license": "0bsd",
   "devDependencies": {

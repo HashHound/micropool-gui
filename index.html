@@ -456,7 +456,7 @@
 
 			<div id="tabhelp" class="tabcontent">
 				<div id="help">
-					<h1>Welcome to the Swap Micropool!</h1>
+					<h1>Welcome to the Dogemone Micropool!</h1>
 					<div id="myDIV">
 						<i class="fas fa-broadcast-tower fa-lg fa-fw"></i>&ensp;Default Presets (Mainnet):&ensp;
 						<button class="btn" onclick="setNodePreset('localmainnet')">Local Node&ensp;<i class="fas fa-map-marker-alt"></i></button>
@@ -466,10 +466,10 @@
 					<p>
 						<ol>
 							<li>
-								Run the latest Swap Daemon and allow it to fully sync.
+								Run the latest Dogemone Daemon and allow it to fully sync.
 							</li>
 								<ul>
-									<li><a href="https://github.com/swap-dev/swap/releases/latest" target="_blank">Latest Swap Daemon</a></li>
+									<li><a href="https://github.com/dogemone-dev/dogemone/releases/latest" target="_blank">Latest Dogemone Daemon</a></li>
 								</ul>
 							<li>
 								Obtain and enter a standard wallet address (prefixed with fh...).
@@ -488,7 +488,7 @@
 								Optionally, download and set up the on-block notify script for the daemon. The default Ctrl-Port will listen for this script.
 							</li>
 								<ul>
-									<li><a href="https://github.com/swap-dev/on-block-notify/releases/latest" target="_blank">Latest On-Block Notify</a></li>
+									<li><a href="https://github.com/dogemone-dev/on-block-notify/releases/latest" target="_blank">Latest On-Block Notify</a></li>
 									<li>Place the executable in the same folder as the daemon and start the daemon with the '--block-notify notify_win.exe' parameter</li>
 								</ul>
 						</ol>
@@ -518,14 +518,14 @@
 					
 					<h3>Deamon Connection</h3>
 					<p>
-						The error "<i>connect ECONNREFUSED x.x.x.x:19950</i>" indicates that micropool cannot connect to the Swap Daemon. Check that the Daemon-Host 
+						The error "<i>connect ECONNREFUSED x.x.x.x:53000</i>" indicates that micropool cannot connect to the Dogemone Daemon. Check that the Daemon-Host 
 						and Daemon-Port are entered correctly, and that there are no firewalls blocking the Daemon-Port. If the daemon is not located on the same machine 
-						as the micropool, you must bind the rpc IP externally (e.g. swapd --rpc-bind-ip 0.0.0.0 --confirm-external-bind --restricted-rpc).
+						as the micropool, you must bind the rpc IP externally (e.g. dogemoned --rpc-bind-ip 0.0.0.0 --confirm-external-bind --restricted-rpc).
 					</p>
 					<p>
-						The error "<i>core is busy</i>" indicates that Swap Daemon has not yet fully synced. You will not be able to connect the miner until it is synced. 
-						If this error occurs intermittently, it means that the daemon is having a hard time maintaining connections with the Swap Network. 
-						Check the firewall settings for the Swap Daemon's p2p port.
+						The error "<i>core is busy</i>" indicates that Dogemone Daemon has not yet fully synced. You will not be able to connect the miner until it is synced. 
+						If this error occurs intermittently, it means that the daemon is having a hard time maintaining connections with the Dogemone Network. 
+						Check the firewall settings for the Dogemone Daemon's p2p port.
 					</p>
 					
 					<h3>Miner Connection</h3>
@@ -542,7 +542,7 @@
 							<li>
 								<b>Avoid mining to a public remote node!</b> Public nodes are a shared resource, which will have a hard time serving new block templates to the micropool 
 								in a timely manner. Expect a massive number of orphan blocks while mining directly to one of the more popular nodes! If for some reason you cannot 
-								run the Swap Daemon on the local network, setting up a private remote node on a VPS is a much better alternative.
+								run the Dogemone Daemon on the local network, setting up a private remote node on a VPS is a much better alternative.
 							</li>
 							<li>
 								<b>Reduce ping time to peers.</b> Generally this means don't run the setup on satellite or cellular internet. If you are stuck with high latency internet, 
@@ -559,15 +559,15 @@
 								<b>Setting up on-block notify</b> will ensure that the micropool will always be ready when the daemon detects a new block on the network. 
 								This reduces the time wasted on mining a stale block that would be rejected by the daemon anyway. Without on-block notify, 
 								the micropool will poll the daemon for new blocks every 0.1s (which is already a fairly aggressive setting). 
-								These milliseconds of delay add up, and is especially important when mining on the Swap Network's 15s block timing. 
+								These milliseconds of delay add up, and is especially important when mining on the Dogemone Network's 15s block timing. 
 								Expect a reduction of ~0.33% effort needed to find each block.
 							</li>
 							<li>
-								<b>Reduce ping time between micropool, Swap Daemon, and miner.</b> Ideally, they should be on the same machine or local network. 
+								<b>Reduce ping time between micropool, Dogemone Daemon, and miner.</b> Ideally, they should be on the same machine or local network. 
 								Having any part of the setup over the internet will impact mining effort and/or orphan rate due to communication delays.
 							</li>
-							<li><b>Prioritize the daemon connection to seed nodes using --add-priority-node.</b> The Swap seed nodes are dedicated servers optimized 
-								to handle hundreds of concurrent connections at a time. The daemon will gain access to many of available Swap nodes with only 
+							<li><b>Prioritize the daemon connection to seed nodes using --add-priority-node.</b> The Dogemone seed nodes are dedicated servers optimized 
+								to handle hundreds of concurrent connections at a time. The daemon will gain access to many of available Dogemone nodes with only 
 								2 hops away when connected to one.
 							</li>
 							<li>
@@ -588,7 +588,7 @@
 			function updateData() { 
 			
 				if( (document.getElementById('daemonport').value < 1024)||(document.getElementById('daemonport').value > 65535))
-					document.getElementById('daemonport').value=19950;
+					document.getElementById('daemonport').value=53000;
 				if( (document.getElementById('poolport').value < 1024)||(document.getElementById('poolport').value > 65535))
 					document.getElementById('poolport').value=14650;
 				if( (document.getElementById('ctrlport').value < 1024)||(document.getElementById('ctrlport').value > 65535))
@@ -632,12 +632,12 @@
 				if (type == "localmainnet")
 				{
 					document.getElementById('daemonhost').value="127.0.0.1";
-					document.getElementById('daemonport').value=19950;
+					document.getElementById('daemonport').value=53000;
 				}
 				else if (type == "remotemainnet")
 				{
 					document.getElementById('daemonhost').value="autonode.xwp.fyi";
-					document.getElementById('daemonport').value=19950;
+					document.getElementById('daemonport').value=53000;
 				}
 				document.getElementById('poolport').value=14650;
 				document.getElementById('ctrlport').value=14651;

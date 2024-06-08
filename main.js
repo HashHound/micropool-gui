@@ -13,7 +13,7 @@ var conn=0;
 
 global.poolconfig = { 
 	poolport:0, 
-	ctrlport:14651,// use with https://github.com/swap-dev/on-block-notify.git
+	ctrlport:14651,// use with https://github.com/dogemone-dev/on-block-notify.git
 	daemonport:0,
 	daemonhost:'',
 	mining_address:'',
@@ -479,7 +479,7 @@ let mainWindow;
 function createWindow () {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		title: 'Swap Micropool 1.5.5',
+		title: 'Dogemone Micropool 1.5.5',
 		width: 1000,
 		height: 800,
 		minWidth: 800,
@@ -513,7 +513,7 @@ function createWindow () {
 			started=1;
 			updateJob('init',function(){
 				server.listen(global.poolconfig.poolport,'0.0.0.0');
-				logger.info("start swap micropool, port "+global.poolconfig.poolport);
+				logger.info("start dogemone micropool, port "+global.poolconfig.poolport);
 				lastBlockFoundTime  = Date.now();
 			});
 			
@@ -544,7 +544,7 @@ function createWindow () {
 						started=1;
 						updateJob('init',function(){
 							server.listen(global.poolconfig.poolport,'0.0.0.0');
-							logger.info("start swap micropool, port "+global.poolconfig.poolport);
+							logger.info("start dogemone micropool, port "+global.poolconfig.poolport);
 							lastBlockFoundTime  = Date.now();
 						});
 						if (global.poolconfig.onlyctrl==false) setInterval(function(){updateJob('timer');}, 100);
