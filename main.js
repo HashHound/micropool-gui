@@ -2,7 +2,7 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
 const storage = require('electron-json-storage');
 const contextMenu = require('electron-context-menu');
-const fs = require('fs') 
+const fs = require('fs')
 
 var c29s = require('./c29s_nowasm.js');
 var verify_c29s = c29s.cwrap('c29s_verify', 'number', ['array','number','array']);
@@ -11,9 +11,9 @@ var shares=0;
 var blocks=0;
 var conn=0;
 
-global.poolconfig = { 
-	poolport:0, 
-	ctrlport:14651,// use with https://github.com/dogemone-dev/on-block-notify.git
+global.poolconfig = {
+	poolport:0,
+	ctrlport:14651,// use with https://github.com/hashhound/on-block-notify.git
 	daemonport:0,
 	daemonhost:'',
 	mining_address:'',
@@ -34,8 +34,8 @@ function seq(){
 function Log() {}
 Log.prototype.log = function (level,message) {
     mainWindow.webContents.send('log', [level,message]);
-    fs.appendFile('log.txt', Date(Date.now()).substr(4, 20)+' ['+level+'] '+message+'\n', (err) => { 
-        if (err) throw err; 
+    fs.appendFile('log.txt', Date(Date.now()).substr(4, 20)+' ['+level+'] '+message+'\n', (err) => {
+        if (err) throw err;
     }
 )}
 Log.prototype.info  = function (message) {this.log('info',message);}
@@ -125,7 +125,7 @@ var lastBlockFoundTime  = 0;
 
 function resetData()
 {
-	shares=0;	
+	shares=0;
 	blocks=0;
 	jobshares=0;
 	totalEffort=0;
@@ -173,7 +173,7 @@ function hashrate(miner) {
 	mainWindow.webContents.send('get-reply', ['data_gps',total.toFixed(2)+" Gps"]);
 
 	return 'rig:'+miner.pass+' '+hr.toFixed(2)+' gps';
-		
+
 }
 
 function updateJob(reason,callback){
@@ -187,19 +187,19 @@ function updateJob(reason,callback){
 		var previous_hash_buf = Buffer.alloc(32);
 		Buffer.from(result.blocktemplate_blob, 'hex').copy(previous_hash_buf,0,7,39);
 		var previous_hash = previous_hash_buf.toString('hex');
-		
+
 
 		if(previous_hash != current_prevhash){
 
 			previous_hashblob = current_hashblob;
-			
+
 			current_prevhash = previous_hash;
 			current_target   = result.difficulty;
 			current_blob     = result.blocktemplate_blob;
-			current_hashblob = result.blockhashing_blob.slice(0,-16);	
+			current_hashblob = result.blockhashing_blob.slice(0,-16);
 			current_height   = result.height;
 			current_reward   = result.expected_reward / Math.pow (10,12);
-			
+
 			jobcounter++;
 
 			logger.info('New block to mine at height '+result.height+' w/ difficulty of '+result.difficulty+' (triggered by: '+reason+')');
@@ -209,7 +209,7 @@ function updateJob(reason,callback){
 			mainWindow.webContents.send('get-reply', ['data_netgraphrate', (current_target / 15000 * 32).toFixed(2) + ' KGps' ]);
 			mainWindow.webContents.send('get-reply', ['data_reward',current_reward.toFixed(2) + ' XWP']);
 
-		
+
 			for (var minerId in connectedMiners){
 				var miner = connectedMiners[minerId];
 				miner.nonces = [];
@@ -238,9 +238,9 @@ function Miner(id,socket){
 	this.difficulty = 1;
 	this.id = id;
 	this.nonces = [];
-	
+
 	var client = this;
-	
+
 	socket.on('data', function(input) {
 		try{
 			for (var data of input.toString().trim().split("\n"))
@@ -251,7 +251,7 @@ function Miner(id,socket){
 			socket.end();
 		}
 	});
-	
+
 	socket.on('close', function(had_error) {
 		logger.info('miner connection dropped '+client.login);
 		mainWindow.webContents.send('get-reply', ['data_conn',--conn]);
@@ -273,7 +273,7 @@ function Miner(id,socket){
 	});
 }
 Miner.prototype.respose = function (result,error,request) {
-	
+
 	var response = JSON.stringify({
 			id:request.id.toString(),
 			jsonrpc:"2.0",
@@ -288,16 +288,16 @@ Miner.prototype.respose = function (result,error,request) {
 Miner.prototype.nextnonce = function () {
 
 	this.oldnonce = this.jobnonce;
-	
+
 	var noncebuffer = Buffer.allocUnsafe(4);
 	noncebuffer.writeUInt32BE(++jobcounter,0);
 	this.jobnonce = noncebuffer.reverse().toString('hex')+'00000000';
-	
+
 	return this.jobnonce;
 }
-	
+
 function handleClient(data,miner){
-	
+
 	logger.debug("m->p "+data);
 
 	var request = JSON.parse(data.replace(/([0-9]{15,30})/g, '"$1"'));//puts all long numbers in quotes, js can't handle 64bit ints
@@ -317,7 +317,7 @@ function handleClient(data,miner){
 			miner.login = miner.login.substr(0, fixedDiff);
 		}
 		logger.info('miner connect '+request.params.login+' ('+request.params.agent+') ('+miner.difficulty+')');
-		
+
 		var workertxt='';
 		for (var minerId in connectedMiners){
 			var miner2 = connectedMiners[minerId];
@@ -326,7 +326,7 @@ function handleClient(data,miner){
 		mainWindow.webContents.send('workers', workertxt);
 		return miner.respose('ok',null,request);
 	}
-	
+
 	if(request && request.method && request.method == "submit") {
 
 		if(!request.params || !request.params.pow || !request.params.nonce || request.params.pow.length != 32) {
@@ -334,13 +334,13 @@ function handleClient(data,miner){
 			logger.info('bad data ('+miner.login+')');
 			return miner.respose(null,{code: -32502, message: "wrong hash"},request);
 		}
-		
+
 		if(! nonceCheck(miner,request.params.pow.join('.'))) {
-		
+
 			logger.info('duplicate ('+miner.login+')');
 			return miner.respose(null,{code: -32503, message: "duplicate"},request);
 		}
-		
+
 		var cycle = Buffer.allocUnsafe(request.params.pow.length*4);
 		for(var i in request.params.pow)
 		{
@@ -349,13 +349,13 @@ function handleClient(data,miner){
 		var noncebuffer = Buffer.allocUnsafe(4);
 		noncebuffer.writeUInt32BE(request.params.nonce,0);
 		var header = Buffer.concat([Buffer.from(current_hashblob, 'hex'),Buffer.from(miner.jobnonce,'hex'),noncebuffer]);
-			
+
 		if(verify_c29s(header,header.length,cycle)){
 
 			var header_previous = Buffer.concat([Buffer.from(previous_hashblob, 'hex'),Buffer.from(miner.oldnonce,'hex'),noncebuffer]);
-			
+
 			if(verify_c29s(header_previous,header_previous.length,cycle)){
-			
+
 				logger.info('wrong hash or very old ('+miner.login+') '+request.params.height);
 				return miner.respose(null,{code: -32502, message: "wrong hash"},request);
 			}
@@ -365,9 +365,9 @@ function handleClient(data,miner){
 				return miner.respose('stale',null,request);
 			}
 		}
-		
+
 		if(check_diff(current_target,cycle)) {
-			
+
 			var block = Buffer.from(current_blob, 'hex');
 
 			for(var i in request.params.pow)
@@ -376,16 +376,16 @@ function handleClient(data,miner){
 			}
 			block.writeUInt32LE(request.params.nonce,47);
 			Buffer.from(miner.jobnonce, 'hex').copy(block,39,0,8);
-			
+
 			var block_found_height = current_height;
 
 			rpc('submitblock', [block.toString('hex')], function(error, result){
-				updateJob('foundblock');								
-				logger.info('BLOCK FOUND by ('+miner.login+' '+miner.pass+')');				
+				updateJob('foundblock');
+				logger.info('BLOCK FOUND by ('+miner.login+' '+miner.pass+')');
 				blocks++;
 				miner.minerblocks++;
 				mainWindow.webContents.send('get-reply', ['data_blocks',blocks]);
-				lastBlockFoundTime  = Date.now() - lastBlockFoundTime;				
+				lastBlockFoundTime  = Date.now() - lastBlockFoundTime;
 				var elaspsedTime = new Date(lastBlockFoundTime);
 				blockstxt+=Date(Date.now()).substr(4, 20)+'&emsp;&emsp;Block '+block_found_height+' found by '+miner.pass+' with '+((jobshares/current_target*100).toFixed(2))+'% effort ('+elaspsedTime.toISOString().substr(11, 8)+'s';
 				if (blocks > 1) {
@@ -404,15 +404,15 @@ function handleClient(data,miner){
 				mainWindow.webContents.send('get-reply', ['data_averageeffort',(totalEffort/blocks*100).toFixed(2)+'%']);
 			});
 		}
-		
+
 		if(check_diff(miner.difficulty,cycle)) {
-		
+
 			shares+=parseFloat(miner.difficulty);
 			miner.blockshares+=parseFloat(miner.difficulty);
 			jobshares+=parseFloat(miner.difficulty);
 			mainWindow.webContents.send('get-reply', ['data_shares',shares]);
 			mainWindow.webContents.send('get-reply', ['data_currenteffort',(jobshares/current_target*100).toFixed(2)+'%']);
-			
+
 			var totalgps=0;
 			for (var minerId in connectedMiners){
 				var miner2 = connectedMiners[minerId];
@@ -438,11 +438,11 @@ function handleClient(data,miner){
 			logger.info('low diff ('+miner.login+') '+miner.difficulty);
 			return miner.respose(null,{code: -32501, message: "low diff"},request);
 		}
-		
+
 	}
-	
+
 	if(request && request.method && request.method == "getjobtemplate") {
-		
+
 		return miner.respose({algo:"cuckaroo",edgebits:29,proofsize:32,noncebytes:4,difficulty:parseFloat(miner.difficulty),height:current_height,job_id:seq(),pre_pow:current_hashblob+miner.nextnonce()},null,request);
 	}
 	else{
@@ -464,7 +464,7 @@ var server = net.createServer(function (localsocket) {
 	var miner = new Miner(minerId,localsocket);
 	mainWindow.webContents.send('get-reply', ['data_conn',++conn]);
 	connectedMiners[minerId] = miner;
-	
+
 });
 
 server.timeout = 0;
@@ -494,7 +494,7 @@ function createWindow () {
 	ipcMain.on('run',(event,arg) => {
 		if(arg[0] === "resetData") resetData();
 	});
-	
+
 	var started=0
 
 	ipcMain.on('set',(event,arg) => {
@@ -505,10 +505,10 @@ function createWindow () {
 		if(arg[0] === "ctrlport") global.poolconfig.ctrlport=arg[1];
 		if(arg[0] === "onlyctrl") global.poolconfig.onlyctrl=arg[1];
 		storage.set(arg[0],arg[1]);
-		
+
 		//Alternative init since this ipcMain.on('set',...) codeblock runs after ipcMain.on('get',...) on a clean startup.
 		//therefore, no config in storage for the original init to work with on clean startup.
-		if(global.poolconfig.mining_address && global.poolconfig.daemonhost && global.poolconfig.daemonport && global.poolconfig.poolport && !started) 
+		if(global.poolconfig.mining_address && global.poolconfig.daemonhost && global.poolconfig.daemonport && global.poolconfig.poolport && !started)
 		{
 			started=1;
 			updateJob('init',function(){
@@ -516,7 +516,7 @@ function createWindow () {
 				logger.info("start dogemone micropool, port "+global.poolconfig.poolport);
 				lastBlockFoundTime  = Date.now();
 			});
-			
+
 			if (global.poolconfig.onlyctrl==false) setInterval(function(){updateJob('timer');}, 100);
 		}
 	});
@@ -536,10 +536,10 @@ function createWindow () {
 					if(arg0 === "daemonport") global.poolconfig.daemonport=object;
 					if(arg0 === "daemonhost") global.poolconfig.daemonhost=object;
 					if(arg0 === "poolport") global.poolconfig.poolport=object;
-					if(arg0 === "ctrlport") global.poolconfig.ctrlport=object;					
+					if(arg0 === "ctrlport") global.poolconfig.ctrlport=object;
 					count++;
-					
-					if(count == 6 && !started) 
+
+					if(count == 6 && !started)
 					{
 						started=1;
 						updateJob('init',function(){

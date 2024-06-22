@@ -5,12 +5,12 @@ Minimal Dogemone Pool
 
 
 
-How to Guide: https://github.com/dogemone-dev/dogemone/wiki/Dogemone-Micropool-How-to-Guide
+How to Guide: https://github.com/hashhound/dogemone/wiki/Dogemone-Micropool-How-to-Guide
 
 To run micropool-gui as a nodejs/electronjs app:
 
     $ npm install electron -g
-    $ git clone https://github.com/dogemone-dev/micropool-gui.git
+    $ git clone https://github.com/hashhound/micropool-gui.git
     $ cd micropool-gui
     $ npm install
     $ npm start
@@ -18,7 +18,7 @@ To run micropool-gui as a nodejs/electronjs app:
 To build the micropool as a standalone executable:
 
     $ npm install electron-builder -g
-    $ git clone https://github.com/dogemone-dev/micropool-gui.git
+    $ git clone https://github.com/hashhound/micropool-gui.git
     $ cd micropool-gui
     $ npm install
     $ electron-builder --linux

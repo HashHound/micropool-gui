@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/dogemone-dev/micropool-gui",
+  "repository": "https://github.com/hashhound/micropool-gui",
   "author": "sebseb7",
   "license": "0bsd",
   "devDependencies": {
