@@ -1,55 +1,64 @@
 body {
-    background-color:#1d244a;
+    background-color: #1d244a;
 }
+
 #body {
-    margin:0;
-    margin-bottom:1rem;
-    padding-left:20px;
-    padding-right:20px;
-    background-color:#1d244a;
-    background-image:url('logo/dogemone_logo_white.png');
-    background-repeat:no-repeat;
-    background-size:99%;
-    background-position: center 9rem; 
-    position:fixed !important;
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    min-width:48.5rem;
+    margin: 0;
+    margin-bottom: 1rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #1d244a;
+    background-image: url('logo/dogemone_logo_white.png'); /* Ensure this path is correct */
+    background-repeat: no-repeat;
+    background-size: 99%;
+    background-position: center 9rem;
+    position: fixed !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 48.5rem;
 }
+
 p, h1, h2, h3, ol, ul {
     font-family: Verdana, Geneva, sans-serif;
 }
+
 p {
-    margin-left:20px;
-    line-height:20px;
+    margin-left: 20px;
+    line-height: 20px;
 }
+
 td {
-    vertical-align:text-bottom;
+    vertical-align: text-bottom;
 }
+
 li {
     margin: 4px 0;
-    line-height:20px;
+    line-height: 20px;
 }
+
 ol ul {
-    list-style-type:disc;
+    list-style-type: disc;
 }
+
 a, a:visited, a:active, a:hover {
-    color: #a3acde;
-    text-decoration:none;
-    font-weight:bold;
+    color: #FFD700; /* Gold color to match the logo */
+    text-decoration: none;
+    font-weight: bold;
 }
+
 .table-style {
-    min-width:30rem;
-    max-width:100%;
-    margin-top:0px;
-    margin-bottom:20px;
-    width:100%;
+    min-width: 30rem;
+    max-width: 100%;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    width: 100%;
     table-layout: fixed;
-    border:0;
+    border: 0;
 }
+
 .table-header {
     margin-top: 20px;
     width: 100%;
@@ -59,9 +68,11 @@ a, a:visited, a:active, a:hover {
     line-height: 1.5em;
     font-weight: 600;
 }
+
 .table-header2 {
     margin-left: 20px;
 }
+
 .table-input-top {
     margin-top: 20px;
     width: 100%;
@@ -71,57 +82,68 @@ a, a:visited, a:active, a:hover {
     line-height: 1.5em;
     font-weight: 600;
 }
+
 .dashboard .table-input-top td {
-    padding-left:5px;
+    padding-left: 5px;
 }
+
 .table-input-top2 {
     padding-left: 15px;
 }
+
 .table-header-top {
     margin-top: 0px;
 }
+
 div {
     font-family: Verdana, Geneva, sans-serif;
-    font-size:.8rem;
-    color: #a3acde;
-    background-color:#151933;
+    font-size: .8rem;
+    color: #FFD700; /* Gold color for better contrast */
+    background-color: #151933;
 }
+
 .data {
     font-size: .8rem;
     background-color: transparent;
-    border:0;
+    border: 0;
 }
+
 .data input {
     background-color: transparent;
-    color: #a3acde;
+    color: #FFD700; /* Gold color for input text */
     font-size: 2rem;
     font-family: Verdana, Geneva, sans-serif;
-    border:0;
-    border-bottom:0px solid #151933;
-    padding:0px;
+    border: 0;
+    border-bottom: 0px solid #151933;
+    padding: 0px;
 }
+
 input {
     font-family: Verdana, Geneva, sans-serif;
     border: 0px solid #1d244a;
     font-size: .8rem;
     line-height: 1rem;
-    padding:5px;
-    color:#a3acde;
-    background-color:#1d244a;
+    padding: 5px;
+    color: #FFD700; /* Gold color for input text */
+    background-color: #1d244a;
     border-radius: 0.25rem;
 }
+
 span {
-    color:#2e3880;
+    color: #FFD700; /* Gold color for span elements */
 }
+
 :not(input):not(textarea),
 :not(input):not(textarea)::after,
 :not(input):not(textarea)::before {
-    -webkit-user-select:none;
-    user-select:none;
+    -webkit-user-select: none;
+    user-select: none;
 }
+
 input, button, textarea, :focus {
-    outline:none; 
+    outline: none;
 }
+
 .tab {
     overflow: hidden;
     background: transparent;
@@ -147,35 +169,36 @@ input, button, textarea, :focus {
     -ms-user-select: none;
     user-select: none;
     border: 0px solid #151933;
-    border-left:0px solid #151933;
-    border-right:0px solid #151933;
-    border-bottom:0px;
+    border-left: 0px solid #151933;
+    border-right: 0px solid #151933;
+    border-bottom: 0px;
     padding: 0.5rem 1rem;
     font-size: .8rem;
     line-height: 1;
     border-radius: 0rem;
-    border-bottom-right-radius:0;
-    border-bottom-left-radius:0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
     -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    color: #a3acde;
+    color: #FFD700; /* Gold color for tab buttons */
     background-color: transparent;
     background-image: none;
-    margin-left:0rem;
+    margin-left: 0rem;
 }
+
 .tab .tablinks1 {
-    margin-left:0rem;
+    margin-left: 0rem;
     border-top-left-radius: 0.25rem;
-    border-left:0px solid #151933;
+    border-left: 0px solid #151933;
 }
 
 .tab .tablinks2 {
-    margin-left:0rem;
+    margin-left: 0rem;
     border-top-right-radius: 0.25rem;
-    border-right:0px solid #151933;
+    border-right: 0px solid #151933;
 }
 
 .tab button:hover {
@@ -187,11 +210,11 @@ input, button, textarea, :focus {
 }
 
 .tabcontent {
-    height:calc(100% - 453px);
+    height: calc(100% - 453px);
     display: none;
     padding: 0px 0px;
-    min-width:30rem;
-    max-width:100%;
+    min-width: 30rem;
+    max-width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -199,43 +222,47 @@ input, button, textarea, :focus {
 }
 
 ::-webkit-scrollbar-track {
-    background: #151933; 
+    background: #151933;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #2e3880; 
+    background: #FFD700; /* Gold color for scrollbar */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #2e3880; 
+    background: #FFD700; /* Gold color for scrollbar hover */
 }
 
-div#log, 
-div#workers, 
-div#blocks, 
+div#log,
+div#workers,
+div#blocks,
 div#help {
-    font-family:"Courier New", Courier, monospace;
-    color:#a3acde;
-    background-color:#151933;
-    border:2px solid #151933;
+    font-family: "Courier New", Courier, monospace;
+    color: #FFD700; /* Gold color for text */
+    background-color: #151933;
+    border: 2px solid #151933;
     border-radius: 0.25rem;
-    padding:5px;
-    height:100%;
+    padding: 5px;
+    height: 100%;
     overflow: auto;
 }
-div#help :not(input):not(textarea){
-    -webkit-user-select:text;
-    user-select:text;
+
+div#help :not(input):not(textarea) {
+    -webkit-user-select: text;
+    user-select: text;
 }
+
 .data_gps input {
     font-family: Verdana, Geneva, sans-serif;
     background-color: transparent;
-    border:0;
-    font-size:2rem;
+    border: 0;
+    font-size: 2rem;
 }
+
 .data_gps {
-    font-size:2rem;
+    font-size: 2rem;
 }
+
 .reset button {
     text-decoration: none;
     display: inline-block;
