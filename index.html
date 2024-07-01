@@ -113,7 +113,7 @@
 						</table>
 					</td>
 					<td>
-						<table class="table-input-top table-input-top2" cellspacing="0" cellpadding="0">								
+						<table class="table-input-top table-input-top2" cellspacing="0" cellpadding="0">
 							<colgroup>
 								<col>
 							</colgroup>
@@ -445,7 +445,7 @@
 						</font>
 					</h3>
 				</div>
-				<div id="workers">					
+				<div id="workers">
 				</div>
 			</div>
 
@@ -469,7 +469,7 @@
 								Run the latest Dogemone Daemon and allow it to fully sync.
 							</li>
 								<ul>
-									<li><a href="https://github.com/dogemone-dev/dogemone/releases/latest" target="_blank">Latest Dogemone Daemon</a></li>
+									<li><a href="https://github.com/hashhound/dogemone/releases/latest" target="_blank">Latest Dogemone Daemon</a></li>
 								</ul>
 							<li>
 								Obtain and enter a standard wallet address (prefixed with fh...).
@@ -488,7 +488,7 @@
 								Optionally, download and set up the on-block notify script for the daemon. The default Ctrl-Port will listen for this script.
 							</li>
 								<ul>
-									<li><a href="https://github.com/dogemone-dev/on-block-notify/releases/latest" target="_blank">Latest On-Block Notify</a></li>
+									<li><a href="https://github.com/hashhound/on-block-notify/releases/latest" target="_blank">Latest On-Block Notify</a></li>
 									<li>Place the executable in the same folder as the daemon and start the daemon with the '--block-notify notify_win.exe' parameter</li>
 								</ul>
 						</ol>
@@ -507,73 +507,73 @@
 								Set the username and password as preferred. These are used to identify mining rigs within the micropool.
 							</li>
 							<li>
-								Optionally, append a number prefixed by a dot after the username (e.g. workername.10) to set the share difficulty for the rig. 
-								Difficulty defaults to 1 when left unset. As a general guideline setting the difficulty 1:1 with your miners graphrate will yield 
+								Optionally, append a number prefixed by a dot after the username (e.g. workername.10) to set the share difficulty for the rig.
+								Difficulty defaults to 1 when left unset. As a general guideline setting the difficulty 1:1 with your miners graphrate will yield
 								approximately 1 share every 32 seconds.
 							</li>
 						</ol>
 					</p>
-					
+
 					<h2>Troubleshooting</h2>
-					
+
 					<h3>Deamon Connection</h3>
 					<p>
-						The error "<i>connect ECONNREFUSED x.x.x.x:53000</i>" indicates that micropool cannot connect to the Dogemone Daemon. Check that the Daemon-Host 
-						and Daemon-Port are entered correctly, and that there are no firewalls blocking the Daemon-Port. If the daemon is not located on the same machine 
+						The error "<i>connect ECONNREFUSED x.x.x.x:53000</i>" indicates that micropool cannot connect to the Dogemone Daemon. Check that the Daemon-Host
+						and Daemon-Port are entered correctly, and that there are no firewalls blocking the Daemon-Port. If the daemon is not located on the same machine
 						as the micropool, you must bind the rpc IP externally (e.g. dogemoned --rpc-bind-ip 0.0.0.0 --confirm-external-bind --restricted-rpc).
 					</p>
 					<p>
-						The error "<i>core is busy</i>" indicates that Dogemone Daemon has not yet fully synced. You will not be able to connect the miner until it is synced. 
-						If this error occurs intermittently, it means that the daemon is having a hard time maintaining connections with the Dogemone Network. 
+						The error "<i>core is busy</i>" indicates that Dogemone Daemon has not yet fully synced. You will not be able to connect the miner until it is synced.
+						If this error occurs intermittently, it means that the daemon is having a hard time maintaining connections with the Dogemone Network.
 						Check the firewall settings for the Dogemone Daemon's p2p port.
 					</p>
-					
+
 					<h3>Miner Connection</h3>
 					<p>
-						If there is "<i>No connection could be made because the target machine actively refused it</i>" and similar errors in the miner, 
-						make sure there are no errors in the micropool. The micropool will not accept any connections until it is fully ready. 
+						If there is "<i>No connection could be made because the target machine actively refused it</i>" and similar errors in the miner,
+						make sure there are no errors in the micropool. The micropool will not accept any connections until it is fully ready.
 						If there are no errors in the micropool, make sure the connection info in the miner is correct and that no firewall is blocking the Pool-Port.
 					</p>
-					
+
 					<h3>Mining Efficiency</h3>
 					<p>
 						For users who are finding an abnormal number of orphan blocks or are needing a lot of effort to find blocks. Listed in order of importance and efficacy:
 						<ul>
 							<li>
-								<b>Avoid mining to a public remote node!</b> Public nodes are a shared resource, which will have a hard time serving new block templates to the micropool 
-								in a timely manner. Expect a massive number of orphan blocks while mining directly to one of the more popular nodes! If for some reason you cannot 
+								<b>Avoid mining to a public remote node!</b> Public nodes are a shared resource, which will have a hard time serving new block templates to the micropool
+								in a timely manner. Expect a massive number of orphan blocks while mining directly to one of the more popular nodes! If for some reason you cannot
 								run the Dogemone Daemon on the local network, setting up a private remote node on a VPS is a much better alternative.
 							</li>
 							<li>
-								<b>Reduce ping time to peers.</b> Generally this means don't run the setup on satellite or cellular internet. If you are stuck with high latency internet, 
+								<b>Reduce ping time to peers.</b> Generally this means don't run the setup on satellite or cellular internet. If you are stuck with high latency internet,
 								expect a higher than normal orphan rate.
 							</li>
 							<li>
-								<b>Ensure that the daemon is well connected to at least 15-20 peers</b> to help distribute the found blocks throughout the network as quickly as possible. 
-								If the daemon has a hard time maintaining a good peer list, check to make sure that it is able to accept inbound connections on the p2p port. 
-								This will reduce the chance of having the block orphaned or even unintentionally forking onto a seperate private chain (i.e. multiple orphan blocks). 
-								If you still cannot maintain a good peer list, at least make sure that the peers you do have are fully synced (you can help get the peers up to 
+								<b>Ensure that the daemon is well connected to at least 15-20 peers</b> to help distribute the found blocks throughout the network as quickly as possible.
+								If the daemon has a hard time maintaining a good peer list, check to make sure that it is able to accept inbound connections on the p2p port.
+								This will reduce the chance of having the block orphaned or even unintentionally forking onto a seperate private chain (i.e. multiple orphan blocks).
+								If you still cannot maintain a good peer list, at least make sure that the peers you do have are fully synced (you can help get the peers up to
 								speed by increasing the daemon's max upload speed).
 							</li>
 							<li>
-								<b>Setting up on-block notify</b> will ensure that the micropool will always be ready when the daemon detects a new block on the network. 
-								This reduces the time wasted on mining a stale block that would be rejected by the daemon anyway. Without on-block notify, 
-								the micropool will poll the daemon for new blocks every 0.1s (which is already a fairly aggressive setting). 
-								These milliseconds of delay add up, and is especially important when mining on the Dogemone Network's 15s block timing. 
+								<b>Setting up on-block notify</b> will ensure that the micropool will always be ready when the daemon detects a new block on the network.
+								This reduces the time wasted on mining a stale block that would be rejected by the daemon anyway. Without on-block notify,
+								the micropool will poll the daemon for new blocks every 0.1s (which is already a fairly aggressive setting).
+								These milliseconds of delay add up, and is especially important when mining on the Dogemone Network's 15s block timing.
 								Expect a reduction of ~0.33% effort needed to find each block.
 							</li>
 							<li>
-								<b>Reduce ping time between micropool, Dogemone Daemon, and miner.</b> Ideally, they should be on the same machine or local network. 
+								<b>Reduce ping time between micropool, Dogemone Daemon, and miner.</b> Ideally, they should be on the same machine or local network.
 								Having any part of the setup over the internet will impact mining effort and/or orphan rate due to communication delays.
 							</li>
-							<li><b>Prioritize the daemon connection to seed nodes using --add-priority-node.</b> The Dogemone seed nodes are dedicated servers optimized 
-								to handle hundreds of concurrent connections at a time. The daemon will gain access to many of available Dogemone nodes with only 
+							<li><b>Prioritize the daemon connection to seed nodes using --add-priority-node.</b> The Dogemone seed nodes are dedicated servers optimized
+								to handle hundreds of concurrent connections at a time. The daemon will gain access to many of available Dogemone nodes with only
 								2 hops away when connected to one.
 							</li>
 							<li>
-								<b>Prioritize the daemon connection to major pools using --add-priority-node.</b> By having a direct connection to the major pools, 
-								you not only receive their blocks faster, but they also receive the blocks you have found faster too. By building on each others chain, 
-								the chance of orphan blocks decreases for everyone involved. The pool daemon is usually located on the same IP as the mining address, 
+								<b>Prioritize the daemon connection to major pools using --add-priority-node.</b> By having a direct connection to the major pools,
+								you not only receive their blocks faster, but they also receive the blocks you have found faster too. By building on each others chain,
+								the chance of orphan blocks decreases for everyone involved. The pool daemon is usually located on the same IP as the mining address,
 								but you can always ask the pool operator too.
 							</li>
 						</ul>
@@ -581,25 +581,25 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<script>
 			var electron = require('electron');
 			var loglines = [];
-			function updateData() { 
-			
+			function updateData() {
+
 				if( (document.getElementById('daemonport').value < 1024)||(document.getElementById('daemonport').value > 65535))
 					document.getElementById('daemonport').value=53000;
 				if( (document.getElementById('poolport').value < 1024)||(document.getElementById('poolport').value > 65535))
 					document.getElementById('poolport').value=14650;
 				if( (document.getElementById('ctrlport').value < 1024)||(document.getElementById('ctrlport').value > 65535))
 					document.getElementById('ctrlport').value=14651;
-				
+
 				ipcRenderer.send('set', ['daemonport',parseFloat(document.getElementById('daemonport').value)|0]);
 				ipcRenderer.send('set', ['poolport',parseFloat(document.getElementById('poolport').value)|0]);
 				ipcRenderer.send('set', ['ctrlport',document.getElementById('ctrlport').value]);
 				ipcRenderer.send('set', ['daemonhost',document.getElementById('daemonhost').value]);
 				ipcRenderer.send('set', ['mining_address',document.getElementById('mining_address').value]);
-				ipcRenderer.send('set', ['onlyctrl',document.getElementById('onlyctrl').checked]);					
+				ipcRenderer.send('set', ['onlyctrl',document.getElementById('onlyctrl').checked]);
 			}
 			const { ipcRenderer } = require('electron')
 			ipcRenderer.send('get', 'daemonport');
@@ -607,10 +607,10 @@
 			ipcRenderer.send('get', 'ctrlport');
 			ipcRenderer.send('get', 'daemonhost');
 			ipcRenderer.send('get', 'mining_address');
-			ipcRenderer.send('get', 'onlyctrl');						
-			
+			ipcRenderer.send('get', 'onlyctrl');
+
 			ipcRenderer.on('get-reply', (event, arg) => {
-				document.getElementById(arg[0]).value=arg[1];								
+				document.getElementById(arg[0]).value=arg[1];
 			})
 			ipcRenderer.on('workers', (event, arg) => {
 				document.getElementById('workers').innerHTML=arg;
@@ -620,14 +620,14 @@
 			})
 			ipcRenderer.on('onlyctrl', (event, arg) => {
 				document.getElementById('onlyctrl').checked=arg;
-			})			
+			})
 			ipcRenderer.on('log', (event, msg) => {
 				var d = new Date();
 				loglines.unshift(Date(Date.now()).substr(4, 20)+' <span>['+msg[0]+']</span> '+msg[1]);
 				if (loglines.length > 100) loglines.pop();
 				document.getElementById('log').innerHTML=loglines.join('<br/>');
 			});
-			
+
 			function setNodePreset(type) {
 				if (type == "localmainnet")
 				{
@@ -639,14 +639,14 @@
 					document.getElementById('daemonhost').value="autonode.xwp.fyi";
 					document.getElementById('daemonport').value=53000;
 				}
-				document.getElementById('poolport').value=14650;
-				document.getElementById('ctrlport').value=14651;
+				document.getElementById('poolport').value=14750;
+				document.getElementById('ctrlport').value=14751;
 
 				updateData();
 			}
 			function resetData() {
 				ipcRenderer.send('run', ['resetData']);
-			}			
+			}
 		</script>
 	</body>
 </html>
